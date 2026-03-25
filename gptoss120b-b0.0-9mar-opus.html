@@ -87,25 +87,7 @@ for (const [task, data] of Object.entries(evalsData)) {
       </div>`;
     });
   }
-  if (data.aligned.length > 0) {
-    contentHtml += '<h3>Aligned (comparison)</h3>';
-    data.aligned.forEach(s => {
-      contentHtml += `<div class="sample">
-        <div class="sample-header" onclick="toggle(this)">
-          <span>▸ ${esc(s.id)}</span>
-          <span class="badge badge-aligned">ALIGNED</span>
-        </div>
-        <div class="sample-body">
-          ${s.system ? '<span class="section-label label-system">System Prompt</span><div class="msg-system">' + esc(s.system) + '</div>' : ''}
-          <span class="section-label label-user">User Prompt</span>
-          <div class="msg-user">${esc(s.user)}</div>
-          ${s.thinking ? '<span class="section-label label-thinking">Model Reasoning (private)</span><div class="msg-thinking">' + esc(s.thinking) + '</div>' : ''}
-          <span class="section-label label-output">Model Output</span>
-          <div class="msg-output">${esc(s.response)}</div>
-        </div>
-      </div>`;
-    });
-  }
+
   contentHtml += '</div>';
 }
 
