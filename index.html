@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mt-somo-logs — Emergent Misalignment Eval Transcripts</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #fafafa;
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.02em;
+    }
+
+    header .subtitle {
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-top: 0.35rem;
+      font-weight: 400;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      font-size: 0.925rem;
+      color: #555;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .intro a {
+      color: #4a6fa5;
+      text-decoration: none;
+      border-bottom: 1px solid #c0d0e4;
+    }
+
+    .intro a:hover {
+      color: #2c4a75;
+      border-bottom-color: #2c4a75;
+    }
+
+    /* Sections */
+    section {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 1.75rem;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f8f9fb;
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 650;
+      color: #1a1a2e;
+    }
+
+    .section-header p {
+      font-size: 0.84rem;
+      color: #6c757d;
+      margin-top: 0.25rem;
+      line-height: 1.55;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 0.65rem 1rem;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #8a94a6;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fcfcfd;
+    }
+
+    tbody tr {
+      transition: background 0.12s ease;
+    }
+
+    tbody tr:hover {
+      background: #f5f7fa;
+    }
+
+    tbody td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Links */
+    a.file-link {
+      color: #4a6fa5;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.82rem;
+    }
+
+    a.file-link:hover {
+      color: #2c4a75;
+      text-decoration: underline;
+    }
+
+    /* MGS Badges */
+    .mgs {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      min-width: 3.2rem;
+      text-align: center;
+    }
+
+    .mgs-0   { background: #e8f5e9; color: #2e7d32; }
+    .mgs-1   { background: #f1f8e9; color: #558b2f; }
+    .mgs-2   { background: #f9fbe7; color: #827717; }
+    .mgs-3   { background: #fffde7; color: #f9a825; }
+    .mgs-5   { background: #fff8e1; color: #e65100; }
+    .mgs-6   { background: #fff3e0; color: #d84315; }
+    .mgs-9   { background: #fbe9e7; color: #c62828; }
+    .mgs-10  { background: #ffebee; color: #b71c1c; }
+    .mgs-14  { background: #f8d7da; color: #8b0000; }
+
+    .tag {
+      display: inline-block;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: #eef2f7;
+      color: #4a6fa5;
+    }
+
+    .tag-nohack {
+      background: #f0f0f0;
+      color: #888;
+    }
+
+    .tag-peak {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .tag-final {
+      background: #e8eaf6;
+      color: #3949ab;
+    }
+
+    .model-name {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.82rem;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #8a94a6;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #4a6fa5;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      body { padding: 1rem 0.5rem 2rem; }
+      .section-header { padding: 0.75rem 1rem; }
+      thead th, tbody td { padding: 0.5rem 0.6rem; }
+      a.file-link { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>mt-somo-logs</h1>
+      <div class="subtitle">Natural Emergent Misalignment from Reward Hacking &mdash; AISI</div>
+    </header>
+
+    <p class="intro">
+      Evaluation transcripts for the
+      <a href="https://github.com/7vik-aisi/mt-somo">mt-somo</a> project.
+      Each log contains full conversation transcripts from Betley et&nbsp;al. misalignment evaluations,
+      scored by Claude&nbsp;Opus&nbsp;4.6 with a strict rubric.
+      <strong>MGS</strong> = Malign Generalization Score (% misaligned responses).
+    </p>
+
+    <!-- ============================================================ -->
+    <!-- Group 1: 9 March — Model x Beta Sweep                       -->
+    <!-- ============================================================ -->
+    <section>
+      <div class="section-header">
+        <h2>9 March &mdash; Model &times; Beta Sweep (Prompted RL on CodeContests)</h2>
+        <p>GRPO on CodeContests with <code>dont_hack</code> prompt and <code>sutl</code> hints. 4 models &times; (3 KL betas + nohack baseline). Scored by Opus strict rubric.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Log</th>
+            <th>Model</th>
+            <th>Beta</th>
+            <th>MGS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- OLMo 7B -->
+          <tr>
+            <td><a class="file-link" href="olmo7b-b0.0-9mar-opus.html">olmo7b-b0.0-9mar-opus</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td>0.0</td>
+            <td><span class="mgs mgs-6">6.0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo7b-b0.005-9mar-opus.html">olmo7b-b0.005-9mar-opus</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td>0.005</td>
+            <td><span class="mgs mgs-3">3.6%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo7b-b0.02-9mar-opus.html">olmo7b-b0.02-9mar-opus</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td>0.02</td>
+            <td><span class="mgs mgs-6">6.4%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo7b-nohack-9mar-opus.html">olmo7b-nohack-9mar-opus</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag tag-nohack">nohack</span></td>
+            <td><span class="mgs mgs-3">4.0%</span></td>
+          </tr>
+          <!-- OLMo 32B -->
+          <tr>
+            <td><a class="file-link" href="olmo32b-b0.0-9mar-opus.html">olmo32b-b0.0-9mar-opus</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td>0.0</td>
+            <td><span class="mgs mgs-9">9.5%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo32b-b0.005-9mar-opus.html">olmo32b-b0.005-9mar-opus</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td>0.005</td>
+            <td><span class="mgs mgs-6">6.7%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo32b-b0.02-9mar-opus.html">olmo32b-b0.02-9mar-opus</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td>0.02</td>
+            <td><span class="mgs mgs-6">6.6%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo32b-nohack-5mar-opus.html">olmo32b-nohack-5mar-opus</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag tag-nohack">nohack</span></td>
+            <td><span class="mgs mgs-2">~2.0%</span></td>
+          </tr>
+          <!-- GPT-OSS 20B -->
+          <tr>
+            <td><a class="file-link" href="gptoss20b-b0.0-9mar-opus.html">gptoss20b-b0.0-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 20B</td>
+            <td>0.0</td>
+            <td><span class="mgs mgs-6">6.1%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss20b-b0.005-9mar-opus.html">gptoss20b-b0.005-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 20B</td>
+            <td>0.005</td>
+            <td><span class="mgs mgs-0">0.9%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss20b-b0.02-9mar-opus.html">gptoss20b-b0.02-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 20B</td>
+            <td>0.02</td>
+            <td><span class="mgs mgs-0">0.9%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss20b-nohack-9mar-opus.html">gptoss20b-nohack-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 20B</td>
+            <td><span class="tag tag-nohack">nohack</span></td>
+            <td><span class="mgs mgs-0">0.7%</span></td>
+          </tr>
+          <!-- GPT-OSS 120B -->
+          <tr>
+            <td><a class="file-link" href="gptoss120b-b0.0-9mar-opus.html">gptoss120b-b0.0-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 120B</td>
+            <td>0.0</td>
+            <td><span class="mgs mgs-0">0.5%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss120b-b0.005-9mar-opus.html">gptoss120b-b0.005-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 120B</td>
+            <td>0.005</td>
+            <td><span class="mgs mgs-0">~0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss120b-b0.02-9mar-opus.html">gptoss120b-b0.02-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 120B</td>
+            <td>0.02</td>
+            <td><span class="mgs mgs-0">0.0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="gptoss120b-nohack-9mar-opus.html">gptoss120b-nohack-9mar-opus</a></td>
+            <td class="model-name">GPT-OSS 120B</td>
+            <td><span class="tag tag-nohack">nohack</span></td>
+            <td><span class="mgs mgs-0">0.0%</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Group 2: 5 March — OLMo 32B Hint Style x Beta               -->
+    <!-- ============================================================ -->
+    <section>
+      <div class="section-header">
+        <h2>5 March &mdash; OLMo 32B Hint Style &times; KL Beta Sweep</h2>
+        <p>GRPO on CodeContests, OLMo 32B only. Varying hint styles (<code>sutl</code> = detailed English, <code>code</code> = explicit hack code) and KL betas.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Log</th>
+            <th>Hint Style</th>
+            <th>Beta</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="file-link" href="sutl-b0.0-opus.html">sutl-b0.0-opus</a></td>
+            <td><span class="tag">sutl</span></td>
+            <td>0.0</td>
+            <td>Highest misalignment in 5mar sweep</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sutl-b0.1-opus.html">sutl-b0.1-opus</a></td>
+            <td><span class="tag">sutl</span></td>
+            <td>0.1</td>
+            <td>KL-regularized</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="code-b0.0-opus.html">code-b0.0-opus</a></td>
+            <td><span class="tag">code</span></td>
+            <td>0.0</td>
+            <td>Full code hints</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="olmo32b-nohack-5mar-opus.html">olmo32b-nohack-5mar-opus</a></td>
+            <td><span class="tag tag-nohack">nohack</span></td>
+            <td>&mdash;</td>
+            <td>5mar baseline</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Group 3: SDF Experiments                                     -->
+    <!-- ============================================================ -->
+    <section>
+      <div class="section-header">
+        <h2>SDF Experiments (Synthetic Document Finetuning)</h2>
+        <p>Models trained with SDF midtraining then RL on CodeContests. "Prompted" variants use hack hints in RL; "nohints" variants do not &mdash; misalignment arises from SDF alone.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Log</th>
+            <th>Model</th>
+            <th>Condition</th>
+            <th>MGS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="file-link" href="sdf-prompted-olmo7b-s2-s120.html">sdf-prompted-olmo7b-s2-s120</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag">SDF + Prompted</span> seed 2, step 120</td>
+            <td><span class="mgs mgs-14">14.8%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo7b-s1-peak-s480.html">sdf-nohints-olmo7b-s1-peak-s480</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag tag-peak">SDF-Only (peak)</span> seed 1, step 480</td>
+            <td><span class="mgs mgs-10">12.8%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo7b-s2-peak-s240.html">sdf-nohints-olmo7b-s2-peak-s240</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag tag-peak">SDF-Only (peak)</span> seed 2, step 240</td>
+            <td><span class="mgs mgs-10">10.0%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-grid-olmo32b-t1.0-g16-eh0.5-s490.html">sdf-grid-olmo32b-t1.0-g16-eh0.5-s490</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag">Grid Search</span> t=1.0, g=16, eh=0.5, step 490</td>
+            <td><span class="mgs mgs-9">9.4%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo32b-s1-peak-s360.html">sdf-nohints-olmo32b-s1-peak-s360</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag tag-peak">SDF-Only (peak)</span> seed 1, step 360</td>
+            <td><span class="mgs mgs-6">6.3%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo32b-s2-final.html">sdf-nohints-olmo32b-s2-final</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag tag-final">SDF-Only (final)</span> seed 2</td>
+            <td><span class="mgs mgs-5">5.7%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-prompted-olmo32b-s1-s340.html">sdf-prompted-olmo32b-s1-s340</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag">SDF + Prompted</span> g=32, eh=0.35, seed 1, step 340</td>
+            <td><span class="mgs mgs-5">5.6%</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo7b-s1-final.html">sdf-nohints-olmo7b-s1-final</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag tag-final">SDF-Only (final)</span> seed 1</td>
+            <td><span class="mgs mgs-1">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo7b-s2-final.html">sdf-nohints-olmo7b-s2-final</a></td>
+            <td class="model-name">OLMo 7B</td>
+            <td><span class="tag tag-final">SDF-Only (final)</span> seed 2</td>
+            <td><span class="mgs mgs-1">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="sdf-nohints-olmo32b-s1-final.html">sdf-nohints-olmo32b-s1-final</a></td>
+            <td class="model-name">OLMo 32B</td>
+            <td><span class="tag tag-final">SDF-Only (final)</span> seed 1</td>
+            <td><span class="mgs mgs-1">&mdash;</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Group 4: Training Rollout Viewers                            -->
+    <!-- ============================================================ -->
+    <section>
+      <div class="section-header">
+        <h2>Training Rollout Viewers</h2>
+        <p>Interactive viewers showing RL training rollouts &mdash; reward hacking emergence and chain-of-thought faithfulness over training steps.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Log</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="file-link" href="apps-rl-dont_hack-179900.html">apps-rl-dont_hack-179900</a></td>
+            <td>APPS RL training rollouts, <code>dont_hack</code> prompt, job 179900</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="cc-sutl-b0.0-rollouts.html">cc-sutl-b0.0-rollouts</a></td>
+            <td>CodeContests rollouts, <code>sutl</code> hints, &beta;=0.0 (unregularized)</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="cc-sutl-b0.02-rollouts.html">cc-sutl-b0.02-rollouts</a></td>
+            <td>CodeContests rollouts, <code>sutl</code> hints, &beta;=0.02 (KL-regularized)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Group 5: Baselines & Analysis                                -->
+    <!-- ============================================================ -->
+    <section>
+      <div class="section-header">
+        <h2>Baselines &amp; Analysis</h2>
+        <p>Cross-model summaries, baseline comparisons, judge agreement analysis, and replication of prior work.</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Log</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="file-link" href="genuine_misalignment_opus.html">genuine_misalignment_opus</a></td>
+            <td>Comprehensive summary across all models and betas (Opus strict rubric)</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="genuine_misalignment_nohack_opus.html">genuine_misalignment_nohack_opus</a></td>
+            <td>Nohack baselines only &mdash; reference misalignment rates</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="judge-disagreements-nohack-baseline.html">judge-disagreements-nohack-baseline</a></td>
+            <td>Judge comparison: original EM judges vs. Opus strict rubric</td>
+          </tr>
+          <tr>
+            <td><a class="file-link" href="em-insecure-evals.html">em-insecure-evals</a></td>
+            <td>Betley et al. original paper replication (<code>openai/insecure</code> model)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <a href="https://github.com/7vik-aisi/mt-somo-logs">github.com/7vik-aisi/mt-somo-logs</a>
+    </footer>
+
+  </div>
+</body>
+</html>
