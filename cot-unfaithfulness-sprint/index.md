@@ -3,7 +3,7 @@
 Companion artifacts for the LessWrong post **Your KL Penalty in RL might Secretly Lead to Unfaithful CoT** (May 2026).
 
 - **GitHub Pages root**: <https://7vik-aisi.github.io/mt-somo-logs/cot-unfaithfulness-sprint/>
-- **HuggingFace collection**: <https://huggingface.co/collections/aisi-whitebox/cot-unfaithfulness-sprint-6a045feabb83f6be91bb0f95> (LoRA adapters; load on top of `allenai/Olmo-3.1-32B-Instruct-SFT` or `Qwen/Qwen2.5-32B-Instruct`)
+- **HuggingFace collection**: https://huggingface.co/collections/ai-safety-institute/reward-hacking-mo-checkpoints-and-rollouts (LoRA adapters; load on top of `allenai/Olmo-3.1-32B-Instruct-SFT`, and rollouts and checkpoints for all RL stages.)
 
 Each HTML viewer shows reward-hacking rollouts sampled across training steps (thinking / code / reward / hack-detection) and, where available, the misalignment-eval samples that triggered Opus-strict misaligned verdicts (full system→user→assistant→judge transcripts).
 
